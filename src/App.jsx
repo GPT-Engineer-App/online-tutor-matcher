@@ -7,6 +7,7 @@ import Layout from "./layouts/default"; // available: default, navbar, sidebar
 import HomePage from "./pages/HomePage";
 import SearchPage from "./pages/SearchPage";
 import ProfilePage from "./pages/ProfilePage";
+import RegisterPage from "./pages/RegisterPage";
 const queryClient = new QueryClient();
 
 export const navItems = [
@@ -28,6 +29,7 @@ const App = () => {
               <Route index element={<HomePage />} />
               <Route path="/search" element={<SearchPage />} />
               <Route path="/profile" element={<ProfilePage />} />
+              <Route path="/register" element={<RegisterPage />} />
             </Route>
           </Routes>
         </Router>

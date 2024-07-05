@@ -8,6 +8,7 @@ import HomePage from "./pages/HomePage";
 import SearchPage from "./pages/SearchPage";
 import ProfilePage from "./pages/ProfilePage";
 import RegisterPage from "./pages/RegisterPage";
+import { TutorsProvider } from "@/contexts/TutorsContext"; // Import TutorsProvider
 const queryClient = new QueryClient();
 
 export const navItems = [
@@ -23,16 +24,18 @@ const App = () => {
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <Toaster />
-        <Router>
-          <Routes>
-            <Route path="/" element={<Layout />}>
-              <Route index element={<HomePage />} />
-              <Route path="/search" element={<SearchPage />} />
-              <Route path="/profile" element={<ProfilePage />} />
-              <Route path="/register" element={<RegisterPage />} />
-            </Route>
-          </Routes>
-        </Router>
+        <TutorsProvider>
+          <Router>
+            <Routes>
+              <Route path="/" element={<Layout />}>
+                <Route index element={<HomePage />} />
+                <Route path="/search" element={<SearchPage />} />
+                <Route path="/profile" element={<ProfilePage />} />
+                <Route path="/register" element={<RegisterPage />} />
+              </Route>
+            </Routes>
+          </Router>
+        </TutorsProvider>
       </TooltipProvider>
     </QueryClientProvider>
   );

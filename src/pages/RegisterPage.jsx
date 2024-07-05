@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -8,6 +8,7 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { toast } from "sonner";
+import { TutorsContext } from "@/contexts/TutorsContext"; // Import TutorsContext
 
 const formSchema = z.object({
   name: z.string().min(1, { message: "Name is required" }),
@@ -18,6 +19,7 @@ const formSchema = z.object({
 
 const RegisterPage = () => {
   const [loading, setLoading] = useState(false);
+  const { addTutor } = useContext(TutorsContext); // Use TutorsContext
   const form = useForm({
     resolver: zodResolver(formSchema),
   });
@@ -27,6 +29,9 @@ const RegisterPage = () => {
     try {
       // Mock API call
       await new Promise((resolve) => setTimeout(resolve, 1000));
+      if (data.userType === "Tutor") {
+        addTutor({ name: data.name, email: data.email, description: "Newly registered tutor", available: true });
+      }
       toast("Registration successful", { description: "You have successfully registered." });
       form.reset();
     } catch (error) {

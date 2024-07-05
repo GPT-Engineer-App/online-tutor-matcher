@@ -1,23 +1,14 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 
+import { TutorsContext } from "@/contexts/TutorsContext"; // Import TutorsContext
+
 const SearchPage = () => {
+  const { tutors } = useContext(TutorsContext); // Use TutorsContext
   const [searchTerm, setSearchTerm] = useState("");
   const [showAvailableOnly, setShowAvailableOnly] = useState(false);
 
-  const tutors = [
-    {
-      name: "John Doe",
-      description: "Experienced Math Tutor",
-      available: true,
-    },
-    {
-      name: "Jane Smith",
-      description: "Looking for a Science Tutor",
-      available: false,
-    },
-    // Add more tutors as needed
-  ];
+  
 
   const filteredTutors = tutors.filter(
     (tutor) =>
